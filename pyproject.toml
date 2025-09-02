@@ -1,0 +1,45 @@
+[project]
+name = "meli-challenge"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "trujicata",email = "trujicata@gmail.com"}
+]
+readme = "README.md"
+
+requires-python = ">=3.11"
+dependencies = [
+    "scikit-learn (>=1.7.1,<2.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "matplotlib (>=3.10.5,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "argendolar (>=3.0.0,<4.0.0)",
+    "xgboost (>=3.0.4,<4.0.0)",
+    "graphviz (>=0.21,<0.22)",
+    "optuna (>=4.5.0,<5.0.0)",
+    "lightning (>=2.0.0,<3.0.0)",
+    "torch (>=2.0.0)",
+    "torchmetrics (>=1.0.0,<2.0.0)",
+    "sentence-transformers (>=2.0.0,<3.0.0)",
+    "tensorboard (>=2.20.0,<3.0.0)",
+]
+
+[tool.poetry]
+packages = [
+    {include = "challenge"}
+]
+package-mode = true
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^1.1.1"
+ipdb = "^0.13.13"
+ruff = "^0.12.11"
+ipykernel = "^6.30.1"
+isort = "^6.0.1"
+pydantic = "^2.11.7"
+ipython = "^9.5.0"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

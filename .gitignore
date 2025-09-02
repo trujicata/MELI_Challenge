@@ -1,0 +1,6 @@
+.venv
+.ruff_cache
+data
+lightning_logs
+__pycache__
+weights
