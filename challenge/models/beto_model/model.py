@@ -14,10 +14,19 @@ class TextClassification(LightningModule):
                 param.requires_grad = False
         self.mlp_head = torch.nn.Sequential(
             torch.nn.Linear(
-                self.model_backbone.get_sentence_embedding_dimension(), 128
+                self.model_backbone.get_sentence_embedding_dimension(),
+                self.model_backbone.get_sentence_embedding_dimension() / 2,
             ),
             torch.nn.ReLU(),
-            torch.nn.Linear(128, 2),
+            torch.nn.Linear(
+                self.model_backbone.get_sentence_embedding_dimension() / 2,
+                self.model_backbone.get_sentence_embedding_dimension() / 4,
+            ),
+            torch.nn.ReLU(),
+            torch.nn.Linear(
+                self.model_backbone.get_sentence_embedding_dimension() / 4,
+                2,
+            ),
         )
         self.loss_fn = torch.nn.BCEWithLogitsLoss()
         # Store device for later use

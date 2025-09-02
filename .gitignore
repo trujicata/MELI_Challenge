@@ -4,3 +4,6 @@ data
 lightning_logs
 __pycache__
 weights
+.env
+.DS_Store
+tensorboard_logs

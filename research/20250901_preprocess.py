@@ -27,6 +27,8 @@ len(df.columns)
 
 # %%
 len(df)
+# %%
+class_weights = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
 
 # %%
 # Do a 5 fold cross validation
@@ -37,7 +39,7 @@ from sklearn.model_selection import KFold
 from xgboost import XGBClassifier
 
 # %%
-clf = XGBClassifier(enable_categorical=True)
+clf = XGBClassifier(enable_categorical=True, class_weight=class_weights)
 
 # %%
 y_train = pd.Series([x == "used" for x in y_train])
@@ -100,21 +102,5 @@ clf.predict(df_test)
 confusion_matrix(y_test, clf.predict(df_test))
 # %%
 clf.score(df_test, y_test)
-# %%
-class_weights = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
-# %%
-class_weights
-# %%
-clf = XGBClassifier(enable_categorical=True, class_weight=class_weights)
-# %%
-clf.fit(df, y_train)
-# %%
-clf.score(df, y_train)
-# %%
-confusion_matrix(y_train, clf.predict(df))
-# %%
-clf.score(df_test, y_test)
-# %%
-confusion_matrix(y_test, clf.predict(df_test))
 
 # %%
