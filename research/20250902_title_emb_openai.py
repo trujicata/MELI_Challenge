@@ -39,7 +39,8 @@ import os
 from openai import OpenAI
 
 
-client = OpenAI(api_key="...")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 response = client.embeddings.create(
     input=train_titles.iloc[0], model="text-embedding-3-small"
 )
@@ -54,10 +55,11 @@ sentences
 from tqdm import tqdm
 
 embeddings = []
+# %%
 # Pair the sentence with the y_train label
 sentences_with_labels = list(zip(sentences, y_train))
-
-for sentence, label in tqdm(sentences_with_labels):
+# %%
+for sentence, label in tqdm(sentences_with_labels[13401:]):
     try:
         response = client.embeddings.create(
             input=sentence, model="text-embedding-3-small"
@@ -74,13 +76,24 @@ print(f"First embedding shape: {embeddings[0].shape}")
 print(
     f"All embeddings have same shape: {all(emb.shape == embeddings[0].shape for emb in embeddings)}"
 )
+with open(f"embeddings_openai_night.pkl", "wb") as f:
+    pickle.dump(embeddings, f)
 # %%
 # Save all the embeddings to a pickle file
 import pickle
 
-with open("embeddings_openai.pkl", "wb") as f:
+# len = len(embeddings)
+
+with open(f"embeddings_openai_night.pkl", "wb") as f:
     pickle.dump(embeddings, f)
 # %%
+import pickle
+
+embeddings = pickle.load(open("embeddings_openai_13.pkl", "rb"))
+# %%
+labels = [label for _, label in embeddings]
+embeddings = [embedding for embedding, _ in embeddings]
+
 
 # %%
 # TensorBoard logging for embeddings visualization
@@ -107,7 +120,6 @@ print(f"Stacked embeddings shape: {embeddings_tensor.shape}")
 # Get corresponding labels for the training data
 # Since we're using train_titles, we need the corresponding y_train labels
 # We'll use the first len(sentences) labels from y_train
-labels = y_train[: len(sentences)]
 # %%
 # Create metadata for each embedding 1 if label=="used" and 0 if label=="new"
 metadata = []

@@ -18,8 +18,9 @@ df.head()
 df["used"] = y_train == "used"
 df["used"] = df["used"].astype(int)
 
+
 # %%
-df = preprocess_whole_dataset(df)
+df = preprocess_whole_dataset(df, use_encoders=True)
 df.head()
 
 # %%
@@ -44,13 +45,24 @@ clf = XGBClassifier(enable_categorical=True, class_weight=class_weights)
 # %%
 y_train = pd.Series([x == "used" for x in y_train])
 y_train = y_train.astype(int)
+# %%
+import pickle
 
+# %%
+# Save df
+# with open("df_train.pkl", "wb") as f:
+#     pickle.dump(df, f)
+# %%
+# df = pickle.load(open("df_train.pkl", "rb"))
 # %%
 # Set to categorical values the columns that are objects
 for col in df.columns:
-    if df[col].dtype == "object":
-        df[col] = df[col].astype("category")
-
+    try:
+        if df[col].dtype == "object":
+            df[col] = df[col].astype("category")
+    except:
+        print(col)
+df.dtypes
 # %%
 kf = KFold(n_splits=5)
 from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
@@ -59,9 +71,6 @@ for train_index, val_index in kf.split(df):
     clf.fit(df.iloc[train_index], y_train.iloc[train_index])
     print("Score:")
     print(clf.score(df.iloc[val_index], y_train.iloc[val_index]))
-    print("Confusion matrix:")
-    print(confusion_matrix(y_train.iloc[val_index], clf.predict(df.iloc[val_index])))
-    print("--------------------------------")
 # %%
 clf.fit(df, y_train)
 clf.score(df, y_train)
@@ -81,7 +90,7 @@ feature_importance_df = feature_importance_df.sort_values("importance", ascendin
 feature_importance_df
 # %%
 df_test = pd.DataFrame(X_test)
-df_test = preprocess_whole_dataset(df_test)
+df_test = preprocess_whole_dataset(df_test, use_encoders=True)
 df_test.head()
 # %%
 df_test.dtypes
@@ -103,4 +112,9 @@ confusion_matrix(y_test, clf.predict(df_test))
 # %%
 clf.score(df_test, y_test)
 
+# %%
+with open("df_test.pkl", "wb") as f:
+    pickle.dump(df_test, f)
+# %%
+df_test = pickle.load(open("df_test.pkl", "rb"))
 # %%

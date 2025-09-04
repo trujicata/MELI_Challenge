@@ -118,3 +118,5 @@ print(f"Embeddings logged to TensorBoard in directory: {log_dir}")
 print("To view the embeddings, run:")
 print(f"tensorboard --logdir={log_dir}")
 print("Then open http://localhost:6006 in your browser")
+
+# %%
