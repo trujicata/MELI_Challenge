@@ -1,6 +1,6 @@
-from argendolar import Argendolar, TipoDivisas
-import pandas as pd
 import numpy as np
+import pandas as pd
+from argendolar import Argendolar, TipoDivisas
 
 argendolar = Argendolar()
 dolar_oficial = argendolar.get_dolar_historia_completa(tipo=TipoDivisas.OFICIAL)

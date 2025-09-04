@@ -1,11 +1,12 @@
-from challenge.dataset.utils import typical_string_processing
-import pandas as pd
-from tqdm import tqdm
-import torch
 import pickle
-from transformers import AutoModel, AutoTokenizer
-from sklearn.preprocessing import normalize
 
+import pandas as pd
+import torch
+from sklearn.preprocessing import normalize
+from tqdm import tqdm
+from transformers import AutoModel, AutoTokenizer
+
+from challenge.dataset.utils import typical_string_processing
 
 SEX_SHOP_WORDS = {
     "ONE-WORDS": [

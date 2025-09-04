@@ -1,20 +1,20 @@
-import pandas as pd
 from copy import deepcopy
-from challenge.dataset.categories import preprocess_categories
-from challenge.dataset.variations import preprocess_variations
-from challenge.dataset.payments import (
-    preprocess_non_mercadopago_payments,
-)
-from challenge.dataset.warranty import preprocess_warranty
-from challenge.dataset.seller import preprocess_seller_address, preprocess_seller_id
-from challenge.dataset.shipping import preprocess_shipping
-from challenge.dataset.prices import preprocess_prices
-from challenge.dataset.pictures import preprocess_pictures
-from challenge.dataset.quantities import preprocess_quantities
-from challenge.dataset.title import title_string_processing
-from challenge.dataset.times import preprocess_times
-from challenge.dataset.attributes import preprocess_attributes
 
+import pandas as pd
+
+from challenge.dataset.attributes import preprocess_attributes
+from challenge.dataset.categories import preprocess_categories
+from challenge.dataset.payments import preprocess_non_mercadopago_payments
+from challenge.dataset.pictures import preprocess_pictures
+from challenge.dataset.prices import preprocess_prices
+from challenge.dataset.quantities import preprocess_quantities
+from challenge.dataset.seller import (preprocess_seller_address,
+                                      preprocess_seller_id)
+from challenge.dataset.shipping import preprocess_shipping
+from challenge.dataset.times import preprocess_times
+from challenge.dataset.title import title_string_processing
+from challenge.dataset.variations import preprocess_variations
+from challenge.dataset.warranty import preprocess_warranty
 
 DROPPING_COLUMNS = [
     "site_id",

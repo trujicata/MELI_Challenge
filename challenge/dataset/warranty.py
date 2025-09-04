@@ -1,4 +1,5 @@
 from typing import Literal
+
 import pandas as pd
 
 from challenge.dataset.utils import typical_string_processing

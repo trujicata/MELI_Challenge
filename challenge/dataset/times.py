@@ -1,5 +1,6 @@
-import pandas as pd
 from datetime import datetime
+
+import pandas as pd
 
 
 def preprocess_times(df: pd.DataFrame) -> pd.DataFrame:
