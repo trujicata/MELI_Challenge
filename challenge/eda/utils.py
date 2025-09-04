@@ -1,13 +1,13 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 
 def column_analysis(column: str, df: pd.DataFrame) -> pd.DataFrame:
     """
     This function is used to analize the distribution of the used items in a column
     It returns a dataframe with the number of items in each value, the proportion of used items and the 95% confidence interval
-    using the Wilson score interval
+    using the Wilson (it's a binomial distribution) score interval.
 
     Args:
         column: str, the column to analyze
