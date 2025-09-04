@@ -50,8 +50,8 @@ import pickle
 
 # %%
 # Save df
-# with open("df_train.pkl", "wb") as f:
-#     pickle.dump(df, f)
+with open("df_train.pkl", "wb") as f:
+    pickle.dump(df, f)
 # %%
 # df = pickle.load(open("df_train.pkl", "rb"))
 # %%
@@ -65,7 +65,7 @@ for col in df.columns:
 df.dtypes
 # %%
 kf = KFold(n_splits=5)
-from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
+from sklearn.metrics import confusion_matrix
 
 for train_index, val_index in kf.split(df):
     clf.fit(df.iloc[train_index], y_train.iloc[train_index])

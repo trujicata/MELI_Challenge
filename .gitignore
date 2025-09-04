@@ -7,3 +7,4 @@ weights
 .env
 .DS_Store
 tensorboard_logs
+*.pkl
