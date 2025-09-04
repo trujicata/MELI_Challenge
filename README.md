@@ -21,3 +21,13 @@ source .venv/bin/activate
 poetry install
 ```
 If you don't have pyenv installed just follow the steps [here](https://github.com/pyenv/pyenv?tab=readme-ov-file#a-getting-pyenv) and remember to install the dependencies first, more info [here](https://github.com/pyenv/pyenv/wiki#suggested-build-environment).
+
+
+## 📸 About the images
+
+Some images of the EDA of the title are stored in **`challenge/assets/`**.  
+GitHub’s notebook previewer sometimes does not display images from private repositories,  
+so if you don’t see inline plots in the notebooks, you can open them directly from the  
+`challenge/assets/` folder or view the notebooks locally in Jupyter.
+
+For a fully rendered version, you can also export the notebooks to HTML or open them in Jupyter/VSCode.
