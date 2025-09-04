@@ -59,10 +59,14 @@ def warranty_de_fabricacion(x: str) -> str:
 
 
 def yes_no_warranty(x):
-    if "si" in x.split(" ") or "con garantia" in x or "garantia total" in x:
-        return "si"
-    elif "sin garantia" in x:
-        return "no"
+    if x not in ["años", "meses", "semanas", "dias", "de fabrica", "usado", "a nuevo"]:
+        x = x.replace(".", "")
+        if "si" in x.split(" ") or "con garantia" in x or "garantia total" in x:
+            return "si"
+        elif "sin garantia" in x:
+            return "no"
+        else:
+            return "otro"
     else:
         return x
 
@@ -77,7 +81,7 @@ def warranty_estado(x: str) -> str:
     Returns:
         str, the processed string. Can be "a nuevo", "usado", "otro", "de fabrica", "años", "meses", "semanas", "dias", "si", "no"
     """
-    if x not in ["años", "meses", "semanas", "dias", "de fabrica", "si", "no"]:
+    if x not in ["años", "meses", "semanas", "dias", "de fabrica"]:
         x = typical_string_processing(x)
         if "nuevo" in x:
             return "a nuevo"
@@ -93,7 +97,7 @@ def warranty_estado(x: str) -> str:
         ):
             return "usado"
         else:
-            return "otro"
+            return x
     else:
         return x
 
@@ -131,8 +135,8 @@ def warranty_string_processing(
         x = typical_string_processing(x)
         x = find_warranty_magnitude(x)
         x = warranty_de_fabricacion(x)
-        x = yes_no_warranty(x)
         x = warranty_estado(x)
+        x = yes_no_warranty(x)
     return x
 
 
