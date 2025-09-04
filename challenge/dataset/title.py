@@ -4,7 +4,6 @@ from tqdm import tqdm
 import torch
 import pickle
 from transformers import AutoModel, AutoTokenizer
-from sklearn.decomposition import PCA
 from sklearn.preprocessing import normalize
 
 
@@ -203,7 +202,7 @@ def is_nuevo_or_usado(x: str) -> str:
         return "unknown"
 
 
-def cluster_title(df: pd.DataFrame, batch_size: int = 32) -> pd.DataFrame:
+def cluster_title(df: pd.DataFrame, batch_size: int = 16) -> pd.DataFrame:
     """
     Transform the title into an embedding, then transform it into 90
     dimensions using PCA, then cluster the embeddings using KMeans.
@@ -226,10 +225,20 @@ def cluster_title(df: pd.DataFrame, batch_size: int = 32) -> pd.DataFrame:
     model = AutoModel.from_pretrained(
         "FacebookAI/xlm-roberta-base", dtype=torch.float16
     )
+    device = torch.device(
+        "mps"
+        if torch.backends.mps.is_available()
+        else "cuda" if torch.cuda.is_available() else "cpu"
+    )
+    model.to(device)
     num_batches = len(titles_list) // batch_size + 1
     embeddings_list = []
     for i in tqdm(range(num_batches)):
-        batch = titles_list[i * batch_size : (i + 1) * batch_size]
+        start_idx = i * batch_size
+        end_idx = min((i + 1) * batch_size, len(titles_list))
+        batch = titles_list[start_idx:end_idx]
+        if not batch:
+            break
         inputs = tokenizer(
             batch, return_tensors="pt", truncation=True, padding=True
         ).to(model.device)
@@ -244,10 +253,10 @@ def cluster_title(df: pd.DataFrame, batch_size: int = 32) -> pd.DataFrame:
         embeddings_list.append(sentence_embeddings)
     embeddings_tensor = torch.cat(embeddings_list)
 
-    pca = pickle.load(open("pca.pkl", "rb"))
+    pca = pickle.load(open("../eda/PCA_roberta.pkl", "rb"))
     embeddings_tensor_pca = pca.transform(embeddings_tensor.cpu().numpy())
     embeddings_normalized = normalize(embeddings_tensor_pca)
-    kmeans = pickle.load(open("best_kmeans.pkl", "rb"))
+    kmeans = pickle.load(open("../eda/best_kmeans_roberta.pkl", "rb"))
     cluster_labels = kmeans.predict(embeddings_normalized)
     # One hot encode the cluster labels
     for k in range(kmeans.n_clusters):
