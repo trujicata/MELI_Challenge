@@ -1,24 +1,16 @@
 # %%
-import start  # noqa
-
 import numpy as np
 import optuna
 import pandas as pd
-
-from sklearn.metrics import (
-    confusion_matrix,
-    f1_score,
-    precision_score,
-    recall_score,
-    accuracy_score,
-)
+import start  # noqa
+from sklearn.metrics import (accuracy_score, confusion_matrix, f1_score,
+                             precision_score, recall_score)
 from sklearn.model_selection import KFold
 from sklearn.utils.class_weight import compute_class_weight
-
 from xgboost import XGBClassifier
 
-from challenge.new_or_used import build_dataset
 from challenge.dataset.preprocess import preprocess_whole_dataset
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -157,9 +149,9 @@ feature_importance_df
 
 # %%
 misses["initial_quantity"].value_counts()
+import matplotlib.pyplot as plt
 # %%
 import seaborn as sns
-import matplotlib.pyplot as plt
 
 sns.histplot(misses["initial_quantity"])
 plt.xscale("log")

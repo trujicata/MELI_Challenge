@@ -1,11 +1,11 @@
 # %%
-import start
-import pandas as pd
 import numpy as np
-
+import pandas as pd
+import start
 from sklearn.utils.class_weight import compute_class_weight
-from challenge.new_or_used import build_dataset
+
 from challenge.dataset.preprocess import preprocess_whole_dataset
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -31,7 +31,6 @@ len(df)
 # %%
 # Do a 5 fold cross validation
 from sklearn.model_selection import KFold
-
 # %%
 # With one fold, train a xgboost classifier
 from xgboost import XGBClassifier
@@ -51,7 +50,8 @@ for col in df.columns:
 
 # %%
 kf = KFold(n_splits=5)
-from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score
+from sklearn.metrics import (confusion_matrix, f1_score, precision_score,
+                             recall_score)
 
 for train_index, val_index in kf.split(df):
     clf.fit(df.iloc[train_index], y_train.iloc[train_index])

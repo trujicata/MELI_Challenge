@@ -1,10 +1,11 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
 import torch
 from transformers import AutoModel, AutoTokenizer
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -88,16 +89,13 @@ embeddings_tensor = torch.cat(embeddings_list)
 print(f"Stacked embeddings shape: {embeddings_tensor.shape}")
 # %%
 embeddings_array = embeddings_tensor.cpu().numpy()
+from sklearn.cluster import KMeans
 # Find the PCA of the embeddings, with variance explained of 0.8
 # %%
 from sklearn.decomposition import PCA
+from sklearn.metrics import (calinski_harabasz_score, davies_bouldin_score,
+                             silhouette_score)
 from sklearn.preprocessing import normalize
-from sklearn.metrics import (
-    silhouette_score,
-    calinski_harabasz_score,
-    davies_bouldin_score,
-)
-from sklearn.cluster import KMeans
 
 # %%
 pca = PCA(n_components=0.8)
@@ -180,11 +178,12 @@ print(f"\nSelected k by Silhouette: {best_k}")
 best_kmeans.labels_
 # %%
 best_kmeans.cluster_centers_
+import os
+from datetime import datetime
+
 # %%
 import torch
 from torch.utils.tensorboard import SummaryWriter
-import os
-from datetime import datetime
 from tqdm import tqdm
 
 # Create a unique log directory with timestamp

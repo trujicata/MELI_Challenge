@@ -1,9 +1,8 @@
 # %%
-import start  # noqa
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-
+import numpy as np
+import pandas as pd
+import start  # noqa
 
 from challenge.new_or_used import build_dataset
 

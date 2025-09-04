@@ -1,6 +1,6 @@
 # %%
-import start  # noqa
 import pandas as pd
+import start  # noqa
 
 from challenge.new_or_used import build_dataset
 

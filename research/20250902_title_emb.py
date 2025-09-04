@@ -1,8 +1,9 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -55,12 +56,13 @@ print(
     f"All embeddings have same shape: {all(emb.shape == embeddings[0].shape for emb in embeddings)}"
 )
 
+import os
+from datetime import datetime
+
 # %%
 # TensorBoard logging for embeddings visualization
 import torch
 from torch.utils.tensorboard import SummaryWriter
-import os
-from datetime import datetime
 from tqdm import tqdm
 
 # Create a unique log directory with timestamp

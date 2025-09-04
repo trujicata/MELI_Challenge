@@ -1,12 +1,11 @@
 # %%
-import start
 import pandas as pd
+import start
 from sklearn.metrics import accuracy_score
 from xgboost import XGBClassifier
 
-
-from challenge.new_or_used import build_dataset
 from challenge.dataset.preprocess import preprocess_whole_dataset
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()

@@ -1,9 +1,10 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
 import torch
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()

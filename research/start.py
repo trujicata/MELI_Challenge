@@ -1,7 +1,7 @@
 #  type: ignore
 import os
-from dotenv import load_dotenv
 
+from dotenv import load_dotenv
 
 try:
     get_ipython().run_line_magic("load_ext", "autoreload")  # noqa

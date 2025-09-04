@@ -1,16 +1,16 @@
 # %%
-import start
-import pandas as pd
-import numpy as np
-import optuna
 import pickle
 
+import numpy as np
+import optuna
+import pandas as pd
+import start
 from sklearn.model_selection import KFold
+from sklearn.utils.class_weight import compute_class_weight
 from xgboost import XGBClassifier
 
-from sklearn.utils.class_weight import compute_class_weight
-from challenge.new_or_used import build_dataset
 from challenge.dataset.preprocess import preprocess_whole_dataset
+from challenge.new_or_used import build_dataset
 
 # %%
 _, y_train, _, y_test = build_dataset()
@@ -26,7 +26,7 @@ for col in df.columns:
         print(col)
 df.dtypes
 # %%
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 class_weights = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
 y_train = pd.Series([x == "used" for x in y_train])

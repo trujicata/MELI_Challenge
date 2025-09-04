@@ -1,10 +1,11 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
 import torch
 from transformers import AutoModel, AutoTokenizer
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -70,11 +71,12 @@ attention_mask = inputs["attention_mask"]
 embeddings = outputs.last_hidden_state
 mask_expanded = attention_mask.unsqueeze(-1).expand(embeddings.size())
 sentence_embeddings = torch.sum(embeddings * mask_expanded, 1) / mask_expanded.sum(1)
+import os
+from datetime import datetime
+
 # %%
 import torch
 from torch.utils.tensorboard import SummaryWriter
-import os
-from datetime import datetime
 from tqdm import tqdm
 
 # Create a unique log directory with timestamp

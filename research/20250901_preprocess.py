@@ -1,11 +1,11 @@
 # %%
-import start
-import pandas as pd
 import numpy as np
-
+import pandas as pd
+import start
 from sklearn.utils.class_weight import compute_class_weight
-from challenge.new_or_used import build_dataset
+
 from challenge.dataset.preprocess import preprocess_whole_dataset
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -34,7 +34,6 @@ class_weights = compute_class_weight("balanced", classes=np.unique(y_train), y=y
 # %%
 # Do a 5 fold cross validation
 from sklearn.model_selection import KFold
-
 # %%
 # With one fold, train a xgboost classifier
 from xgboost import XGBClassifier

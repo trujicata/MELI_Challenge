@@ -1,10 +1,9 @@
 # %%
-import start  # noqa
 import matplotlib.pyplot as plt
-import seaborn as sns
-from argendolar import Argendolar, TipoDivisas
 import pandas as pd
-
+import seaborn as sns
+import start  # noqa
+from argendolar import Argendolar, TipoDivisas
 
 from challenge.new_or_used import build_dataset
 

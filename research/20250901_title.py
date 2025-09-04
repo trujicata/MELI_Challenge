@@ -1,15 +1,16 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
-import torch
-import numpy as np
-from lightning import LightningModule, Trainer
-from torchmetrics import Accuracy
-from torch.utils.data import DataLoader, Dataset
-from lightning import LightningDataModule
 import random
+
+import numpy as np
+import pandas as pd
+import start  # noqa
+import torch
+from lightning import LightningDataModule, LightningModule, Trainer
 from lightning.pytorch.callbacks import ModelCheckpoint
+from torch.utils.data import DataLoader, Dataset
+from torchmetrics import Accuracy
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()

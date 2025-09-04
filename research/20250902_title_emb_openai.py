@@ -1,8 +1,9 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -36,8 +37,8 @@ test_titles.value_counts()
 test_titles.value_counts(normalize=True)
 # %%
 import os
-from openai import OpenAI
 
+from openai import OpenAI
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -95,12 +96,13 @@ labels = [label for _, label in embeddings]
 embeddings = [embedding for embedding, _ in embeddings]
 
 
+import os
+from datetime import datetime
+
 # %%
 # TensorBoard logging for embeddings visualization
 import torch
 from torch.utils.tensorboard import SummaryWriter
-import os
-from datetime import datetime
 from tqdm import tqdm
 
 # Create a unique log directory with timestamp

@@ -1,8 +1,9 @@
 # %%
-import start  # noqa
-from challenge.new_or_used import build_dataset
-import pandas as pd
 import numpy as np
+import pandas as pd
+import start  # noqa
+
+from challenge.new_or_used import build_dataset
 
 # %%
 X_train, y_train, X_test, y_test = build_dataset()
@@ -46,10 +47,10 @@ pearson_correlation
 # %%
 kendall_correlation = df[["used", "total_time_seconds"]].corr(method="kendall")
 kendall_correlation
+import matplotlib.pyplot as plt
+import seaborn as sns
 # %%
 from sklearn.preprocessing import MinMaxScaler
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # %%
 scaler = MinMaxScaler()
